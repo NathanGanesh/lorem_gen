@@ -21,14 +21,14 @@ function Input(props) {
 		suffix: '\n', // Line ending, defaults to "\n" or "\r\n" (win32)
 		units: 'sentences' // paragraph(s), "sentence(s)", or "word(s)"
 	});
-
+	const [ lorem12, setLorem12 ] = useState('');
 	// <p>{lorem1}</p>
 	// 		<p>{lorem2}</p>
 	// 		<p>{lorem3}</p>
 
 	function handleChange(event) {
 		const { name, value } = event.target;
-		// const lorem1 = lorem25.generateWords(parseInt(lorem.count));
+		const lorem12 = setLorem12(lorem25.generateWords(parseInt(lorem.count)));
 		setLorem((prevValue) => {
 			return {
 				...prevValue,
@@ -54,7 +54,7 @@ function Input(props) {
 	return (
 		<div>
 			<input name={props.name} placeholder={props.name} onChange={handleChange} />
-			{/* <p>{lorem1}</p> */}
+			<p>{lorem12}</p>
 		</div>
 	);
 }
