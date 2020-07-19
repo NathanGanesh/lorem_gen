@@ -2,8 +2,16 @@ import React, { Component, useState } from 'react';
 import { LoremIpsum } from 'lorem-ipsum';
 
 function Input(props) {
-	const [ box, setBox ] = useState({
-		count: 1, // Number of "words", "sentences", or "paragraphs"
+	const [ lorem, setLorem ] = useState({
+		sentencesPerParagraph: {
+			max: 8,
+			min: 4
+		},
+		wordsPerSentence: {
+			max: 16,
+			min: 4
+		},
+		count: '1', // Number of "words", "sentences", or "paragraphs"
 		format: 'plain', // "plain" or "html"
 		paragraphLowerBound: 3, // Min. number of sentences per paragraph.
 		paragraphUpperBound: 7, // Max. number of sentences per paragarph.
@@ -14,21 +22,39 @@ function Input(props) {
 		units: 'sentences' // paragraph(s), "sentence(s)", or "word(s)"
 	});
 
-	// const lorem1 = lorem.generateWords(1);
-	// const lorem2 = lorem.generateSentences(5);
-	// const lorem3 = lorem.generateParagraphs(7);
-
 	// <p>{lorem1}</p>
 	// 		<p>{lorem2}</p>
 	// 		<p>{lorem3}</p>
 
 	function handleChange(event) {
-		console.log(event);
+		const { name, value } = event.target;
+		// const lorem1 = lorem25.generateWords(parseInt(lorem.count));
+		setLorem((prevValue) => {
+			return {
+				...prevValue,
+				[name]: value
+			};
+		});
 	}
 
+	const lorem25 = new LoremIpsum({
+		sentencesPerParagraph: {
+			max: 8,
+			min: 4
+		},
+		wordsPerSentence: {
+			max: 16,
+			min: 4
+		}
+	});
+
+	// const lorem253 = lorem25.generateSentences(5);
+	// const lorem2 = this.lorem.generateSentences(5);
+	// const lorem3 = this.lorem.generateParagraphs(7);
 	return (
 		<div>
 			<input name={props.name} placeholder={props.name} onChange={handleChange} />
+			{/* <p>{lorem1}</p> */}
 		</div>
 	);
 }
